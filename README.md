@@ -1,2 +1,5 @@
 # my-eks-tf
-Public repository with sample code showing how to create eks cluster within it's own vpc using terraform
+
+This is a sample terraform module to create an Amazon EKS Cluster in it's own VPC along with other necessary infrastructure.
+
+
