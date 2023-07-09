@@ -1,8 +1,3 @@
-variable "region" {
-  type        = string
-  description = "aws region where the resources are being created"
-}
-
 variable "vpc_name" {
   type        = string
   description = "name of the vpc to be created"

@@ -1,4 +1,3 @@
-
 # invoking vpc and subnets modules
 module "vpc_with_subnets" {
   # invoke vpc_and_subnets module under modules directory

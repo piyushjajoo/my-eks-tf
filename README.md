@@ -86,7 +86,13 @@ export AWS_SECRET_ACCESS_KEY=<secret access key copied after creating the IAM Us
 
 NOTE: if you choose the `assumeRole` option, you will need to modify the `provider` block in main.tf, I have kept a sample commented code. Please refer terraform documentation for more ways to set the [provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#authentication-and-configuration).
 
-2. Initialize the module and set the backend of `tfstate` file which records the state of the resources created by `terraform apply` invocation.
+2. Make sure the s3 bucket to store the tfstate file exists, if not please create. Following is an example how you can use aws cli to create the s3 bucket.
+
+```shell
+aws s3api create-bucket --bucket "your-bucket-name" --region "your-aws-region"
+```
+
+3. Initialize the module and set the backend of `tfstate` file which records the state of the resources created by `terraform apply` invocation.
    
 ```shell
 # tfstate file name
@@ -94,7 +100,7 @@ tfstate_file_name="<some name e.g. eks-1111111111>"
 
 # tfstate s3 bucket name, this will have the tfstate file which you can use for further runs of this terraform module
 # for example to upgrade k8s version or add new node pools etc.. The bucket name must be unique as s3 is a global service. Terraform will create the s3 bucket if it doesn't exist
-tfstate_bucket_name="some unique s3 bucket name e.g. my-tfstate-<myname>"
+tfstate_bucket_name="unique s3 bucket name you created above e.g. my-tfstate-<myname>"
 
 # initialize the terraform module
 terraform init -backend-config "key=${tfstate_file_name}" -backend-config "bucket=${tfstate_bucket_name}" -backend-config "region=us-east-1"
@@ -102,16 +108,22 @@ terraform init -backend-config "key=${tfstate_file_name}" -backend-config "bucke
 
 After execution of above, you will observe that, an s3 bucket is created in aws account.
 
-3. Retrieve the `terraform plan`, a preview of what will happen when you apply this terraform module. This is a best practice to understand the change.
+4. Retrieve the `terraform plan`, a preview of what will happen when you apply this terraform module. This is a best practice to understand the change.
 
 ```shell
-terraform plan
+terraform plan -var-file="path/to/your/terraform.tfvars"
+
+# example
+terraform plan -var-file="sample.tfvars"
 ```
 
-4. If you are satisfied with the plan above, this is the final step to apply the terraform and wait for the resources to be created.
+5. If you are satisfied with the plan above, this is the final step to apply the terraform and wait for the resources to be created.
 
 ```shell
-terraform apply
+terraform apply -var-file="path/to/your/terraform.tfvars"
+
+# example
+terraform apply -var-file="sample.tfvars"
 ```
 
 After successful execution, go to next section on how to connect to the EKS Cluster and install `nginx` helm chart.
@@ -171,7 +183,7 @@ kubectl get pods --all-namespaces
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_eks_cluster_name"></a> [eks\_cluster\_name](#input\_eks\_cluster\_name) | eks cluster name | `string` | `"platformwale"` | no |
+| <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | eks cluster name | `string` | `"platformwale"` | no |
 | <a name="input_k8s_version"></a> [k8s\_version](#input\_k8s\_version) | k8s version | `string` | `"1.27"` | no |
 | <a name="input_region"></a> [region](#input\_region) | aws region where the resources are being created | `string` | n/a | yes |
 | <a name="input_vpc_cidr"></a> [vpc\_cidr](#input\_vpc\_cidr) | vpc cidr block to be used | `string` | `"10.0.0.0/16"` | no |
@@ -202,4 +214,29 @@ terraform fmt -recursive
 
 # just want to format a file
 terraform fmt "<file/path>"
+```
+
+## Troubleshooting
+
+1. If you see following error while executing `terraform init` command for the first time, this means the tfstate s3 bucket is not created, manually create the s3 bucket. You can read more details as mentioned in [terraform s3 backend documentation](https://developer.hashicorp.com/terraform/language/settings/backends/s3).
+
+```
+╷
+│ Error: Failed to get existing workspaces: S3 bucket does not exist.
+│
+│ The referenced S3 bucket must have been previously created. If the S3 bucket
+│ was created within the last minute, please wait for a minute or two and try
+│ again.
+│
+│ Error: NoSuchBucket: The specified bucket does not exist
+│ 	status code: 404, request id: 2R4WDEWZZQGXT7YD, host id: YHsfJYMpCvY5XcP+3rPzhpKl0kpmIku/VvSCjXfxHgskkTec7e0IPlm5PAjjCb3yUaKnlJ5HTMq3HgByAepruXbT2MyQEf/J
+│
+│
+│
+```
+
+You can also use the below AWS Cli command to create the aws s3 bucket, make sure your aws cli is configured to point to the aws account where you want to run the terraform.
+
+```shell
+aws s3api create-bucket --bucket "your-bucket-name" --region "your-aws-region"
 ```

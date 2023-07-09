@@ -1,4 +1,10 @@
-# setup terraform aws provider to create resources in us-west-2
+# to use s3 backend 
+# s3 bucket is configured at command line
+terraform {
+  backend "s3" {}
+}
+
+# setup terraform aws provider to create resources
 provider "aws" {
   region = var.region
 
