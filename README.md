@@ -19,9 +19,11 @@ This repository has a top level terraform module [cluster](./cluster/README.md) 
 
 ## Links to module documentation
 
-1. [cluster](./cluster/README.md)
-2. [vpc_and_subnets](./modules/vpc_and_subnets/README.md)
-3. [eks](./modules/eks/README.md)
+| Module Name | Documentation Link |
+|-------------|--------------------|
+| Cluster module with EKS, VPC and Subnets | [README](./cluster/README.md)
+| EKS | [README](./modules/eks/README.md) |
+| VPC And Subnets | [README](./modules/vpc_and_subnets/README.md) |
 
 ## Modularization of terraform
 
