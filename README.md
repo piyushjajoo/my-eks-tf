@@ -1,6 +1,6 @@
 # my-eks-tf
 
-This repository provides ideas on how one could structure various terraform modules and build scaffolding for their end user. 
+This repository provides ideas on how one could structure various terraform modules and build scaffolding for their end user. The example in this repository creates an eks cluster within it's own vpc with public and private subnets.
 
 ## Summary
 
