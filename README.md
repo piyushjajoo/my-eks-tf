@@ -182,3 +182,22 @@ kubectl get pods --all-namespaces
 | <a name="output_cluster_certificate_authority_data"></a> [cluster\_certificate\_authority\_data](#output\_cluster\_certificate\_authority\_data) | Base64 encoded certificate data required to communicate with the cluster |
 | <a name="output_cluster_endpoint"></a> [cluster\_endpoint](#output\_cluster\_endpoint) | Endpoint for your Kubernetes API server |
 | <a name="output_cluster_oidc_issuer_url"></a> [cluster\_oidc\_issuer\_url](#output\_cluster\_oidc\_issuer\_url) | The URL on the EKS cluster for the OpenID Connect identity provider |
+
+## Handy commands
+
+1. Generate documentation by running `terraform-docs` command from the module directory. Now you can copy the documentation from stdout.
+
+```shell
+cd ./modules/eks
+terraform-docs markdown .
+```
+
+2. Format `hcl` files.
+
+```shell
+# recursively format all the files
+terraform fmt -recursive
+
+# just want to format a file
+terraform fmt "<file/path>"
+```

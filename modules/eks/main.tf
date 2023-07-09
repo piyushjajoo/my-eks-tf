@@ -21,11 +21,11 @@ module "eks" {
   vpc_id = var.vpc_id
 
   # subnets where the eks cluster needs to be created
-  control_plane_subnet_ids  = var.control_plane_subnet_ids
+  control_plane_subnet_ids = var.control_plane_subnet_ids
 
   # to enable public and private access for eks cluster endpoint
   cluster_endpoint_private_access = true
-  cluster_endpoint_public_access = true
+  cluster_endpoint_public_access  = true
 
   # create an OpenID Connect Provider for EKS to enable IRSA
   enable_irsa = true
@@ -51,7 +51,7 @@ module "eks" {
 
   # subnets where the eks node groups needs to be created
   subnet_ids = var.eks_node_groups_subnet_ids
-  
+
   # eks managed node group named worker
   eks_managed_node_groups = {
     worker = {
