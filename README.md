@@ -92,7 +92,7 @@ export AWS_SECRET_ACCESS_KEY=<secret access key copied after creating the IAM Us
 
 NOTE: if you choose the `assumeRole` option, you will need to modify the `provider` block in main.tf, I have kept a sample commented code. Please refer terraform documentation for more ways to set the [provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#authentication-and-configuration).
 
-1. Make sure the s3 bucket to store the tfstate file exists, if not please create. Following is an example how you can use aws cli to create the s3 bucket.
+2. Make sure the s3 bucket to store the tfstate file exists, if not please create. Following is an example how you can use aws cli to create the s3 bucket.
 
 ```shell
 aws s3api create-bucket --bucket "your-bucket-name" --region "your-aws-region"
