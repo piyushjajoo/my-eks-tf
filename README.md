@@ -77,16 +77,22 @@ In [outputs.tf](./outputs.tf) tf file you will see declaration of any output var
 
 Execute all the commands below from `my-eks-tf` root where the above explained files are -
 
-1. Make sure your terminal is configured to talk to AWS Account. You can do so by any of the way explained in this [document](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html). For simplicity, we are setting following environment variables on the terminal (assuming you know how to get this, one way is create an IAM User with necessary permissions to execute this terraform, for simplicity create an IAM User with AdministratorAccess permissions, copy the credentials, make sure to delete the IAM User one you are done with this execution)
-   
+1. Make sure your terminal is configured to talk to AWS Account, you can use one of the ways explained in this [document](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html). In my case I am using one of the profiles present in my `~/.aws/config` file and setting the environment variable as below -
+
+```shell
+export AWS_PROFILE="my-aws-profile"
 ```
+
+**Another** simple way is create an IAM User with `AdminstratorAccess` (only do for temporary purpose to quickly test, and make sure to delete the IAM User after usage) and set the following environment variables on the terminal.
+
+```shell
 export AWS_ACCESS_KEY_ID=<access key id copied after creating the IAM User>
 export AWS_SECRET_ACCESS_KEY=<secret access key copied after creating the IAM User>
 ```
 
 NOTE: if you choose the `assumeRole` option, you will need to modify the `provider` block in main.tf, I have kept a sample commented code. Please refer terraform documentation for more ways to set the [provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#authentication-and-configuration).
 
-2. Make sure the s3 bucket to store the tfstate file exists, if not please create. Following is an example how you can use aws cli to create the s3 bucket.
+1. Make sure the s3 bucket to store the tfstate file exists, if not please create. Following is an example how you can use aws cli to create the s3 bucket.
 
 ```shell
 aws s3api create-bucket --bucket "your-bucket-name" --region "your-aws-region"
