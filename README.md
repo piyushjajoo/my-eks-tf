@@ -194,7 +194,7 @@ $ kubectl get svc -n default nginx
 Error from server (NotFound): services "nginx" not found
 ```
 
-2. Destroy the infrastructure
+2. Destroy the infrastructure. It takes about ~15 mins to delete the infrastructure we created above.
 
 ```shell
 terraform destroy -var-file="sample.tfvars"
