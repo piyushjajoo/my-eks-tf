@@ -35,6 +35,7 @@ module "eks" {
   cluster_addons = {
     # extensible DNS server that can serve as the Kubernetes cluster DNS
     coredns = {
+      preserve    = true
       most_recent = true
     }
 
@@ -53,15 +54,6 @@ module "eks" {
   subnet_ids = var.eks_node_groups_subnet_ids
 
   # eks managed node group named worker
-  eks_managed_node_groups = {
-    worker = {
-      min_size     = 1
-      max_size     = 2
-      desired_size = 1
-
-      instance_types = ["t2.micro"]
-      capacity_type  = "SPOT"
-    }
-  }
+  eks_managed_node_groups = var.workers_config
 
 }

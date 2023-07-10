@@ -31,8 +31,7 @@ This module only requires you to specify eks cluster name, k8s version, vpc id, 
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_eks"></a> [eks](#module\_eks) | terraform-aws-modules/eks/aws | 19.15.3 |
-
+| <a name="module_eks"></a> [eks](#module\_eks) | [terraform-aws-modules/eks/aws](https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/19.15.3) | 19.15.3 |
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -42,6 +41,7 @@ This module only requires you to specify eks cluster name, k8s version, vpc id, 
 | <a name="input_eks_node_groups_subnet_ids"></a> [eks\_node\_groups\_subnet\_ids](#input\_eks\_node\_groups\_subnet\_ids) | subnet ids where the eks node groups needs to be created | `list(string)` | n/a | yes |
 | <a name="input_k8s_version"></a> [k8s\_version](#input\_k8s\_version) | kubernetes version | `string` | `"1.27"` | no |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | vpc id where the cluster security group needs to be created | `string` | n/a | yes |
+| <a name="input_workers_config"></a> [workers\_config](#input\_workers\_config) | workers config | `map(any)` | <pre>{<br>  "worker": {<br>    "capacity_type": "SPOT",<br>    "desired_size": 1,<br>    "instance_types": [<br>      "t3.large"<br>    ],<br>    "max_size": 2,<br>    "min_size": 1<br>  }<br>}</pre> | no |
 
 ## Outputs
 

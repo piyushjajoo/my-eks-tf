@@ -31,7 +31,7 @@ Please read the documentation below to know details about the variables accepted
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_vpc_and_subnets"></a> [vpc\_and\_subnets](#module\_vpc\_and\_subnets) | terraform-aws-modules/vpc/aws | 5.0.0 |
+| <a name="module_vpc_and_subnets"></a> [vpc\_and\_subnets](#module\_vpc\_and\_subnets) | [terraform-aws-modules/vpc/aws](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/5.0.0) | 5.0.0 |
 
 ## Resources
 

@@ -123,7 +123,7 @@ terraform plan -var-file="path/to/your/terraform.tfvars"
 terraform plan -var-file="sample.tfvars"
 ```
 
-5. If you are satisfied with the plan above, this is the final step to apply the terraform and wait for the resources to be created.
+5. If you are satisfied with the plan above, this is the final step to apply the terraform and wait for the resources to be created. It will take about ~20 mins for all the resources to be created.
 
 ```shell
 terraform apply -var-file="path/to/your/terraform.tfvars"
@@ -156,13 +156,48 @@ kubectl config current-context
 3. Install nginx helm chart
 
 ```shell
-helm install my-release oci://ghcr.io/nginxinc/charts/nginx-ingress --version 0.18.0
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm install -n default nginx bitnami/nginx
 ```
 
-4. Check if all the pods are scheduled and running
+4. Check if all the pods are scheduled and running. Also validate that the load balancer is created, you can copy paste the `EXTERNAL-IP` and put it in browser, you should see the `Welcome to nginx!` page as shown in the screenshot below.
 
 ```shell
-kubectl get pods --all-namespaces
+kubectl get pods -n default
+kubectl get svc -n default
+```
+```
+# example
+$ kubectl get pods -n default
+NAME                     READY   STATUS    RESTARTS   AGE
+nginx-7c8ff57685-ck9pn   1/1     Running   0          3m31s
+
+$ kubectl get svc -n default nginx
+NAME    TYPE           CLUSTER-IP       EXTERNAL-IP                                                              PORT(S)        AGE
+nginx   LoadBalancer   172.20.214.161   a90947031083b48b9b61849f22cdceda-410225407.us-east-2.elb.amazonaws.com   80:32414/TCP   2m59s
+```
+
+![Welcome to nginx!!](./images/welcome-to-nginx.png)
+
+## Cleanup
+
+This is the most important step if you don't want any unexpected cloud costs on your account.
+
+1. Make sure to uninstall the `nginx` helm chart to delete the loadbalancer before you start destroying the infrastructure in next step using `terraform destroy`. Make sure the `nginx` svc is deleted.
+
+```shell
+helm uninstall -n default nginx
+```
+```
+# validate that the external service is deleted, it takes a few mins
+$ kubectl get svc -n default nginx
+Error from server (NotFound): services "nginx" not found
+```
+
+2. Destroy the infrastructure
+
+```shell
+terraform destroy -var-file="sample.tfvars"
 ```
 
 ## Terraform Documentation

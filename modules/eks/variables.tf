@@ -23,3 +23,18 @@ variable "vpc_id" {
   type        = string
   description = "vpc id where the cluster security group needs to be created"
 }
+
+variable "workers_config" {
+  type = map(any)
+  description = "workers config"
+  default = {
+    worker = {
+      min_size     = 1
+      max_size     = 2
+      desired_size = 1
+
+      instance_types = ["t3.large"]
+      capacity_type  = "SPOT"
+    }
+  }
+}
