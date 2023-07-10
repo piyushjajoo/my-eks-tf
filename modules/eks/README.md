@@ -11,7 +11,7 @@ This module creates following resources -
   - vpc-cni
   - coredns
   - kube-proxy
-- eks managed node group named `worker` in the provided subnets, creates SPOT instances of type `t2.micro`
+- eks managed node group named `worker` in the provided subnets, creates SPOT instances of type `t3.large`
 
 This module only requires you to specify eks cluster name, k8s version, vpc id, eks cluster subnet ids and eks managed node groups subnet ids. All the other variables have default values. If the default values are used, this module creates all the resources mentioned above. Please read the documentation below to know details about the variables accepted by this module.
 
