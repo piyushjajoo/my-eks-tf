@@ -25,7 +25,7 @@ variable "vpc_id" {
 }
 
 variable "workers_config" {
-  type = map(any)
+  type        = map(any)
   description = "workers config"
   default = {
     worker = {
