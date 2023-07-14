@@ -218,7 +218,7 @@ terraform destroy -var-file="sample.tfvars"
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_cluster"></a> [cluster](#module\_cluster) | ./cluster | n/a |
+| <a name="module_cluster"></a> [cluster](#module\_cluster) | [./cluster](./cluster) | n/a |
 
 ### Inputs
 
