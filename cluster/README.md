@@ -34,8 +34,8 @@ This module creates following resources -
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_eks_with_node_group"></a> [eks\_with\_node\_group](#module\_eks\_with\_node\_group) | ../modules/eks | n/a |
-| <a name="module_vpc_with_subnets"></a> [vpc\_with\_subnets](#module\_vpc\_with\_subnets) | ../modules/vpc_and_subnets | n/a |
+| <a name="module_eks_with_node_group"></a> [eks\_with\_node\_group](#module\_eks\_with\_node\_group) | [eks](../modules/eks) | n/a |
+| <a name="module_vpc_with_subnets"></a> [vpc\_with\_subnets](#module\_vpc\_with\_subnets) | [vpc_and_subnets](../modules/vpc_and_subnets) | n/a |
 
 ## Inputs
 
