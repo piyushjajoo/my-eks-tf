@@ -4,7 +4,7 @@ terraform {
   backend "s3" {}
 }
 
-# setup terraform aws provider to create resources
+# setup terraform aws provider to create resources in your desired aws region
 provider "aws" {
   region = var.region
 

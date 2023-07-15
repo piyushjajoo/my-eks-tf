@@ -2,6 +2,8 @@
 
 This repository provides ideas on how one could structure various terraform modules and build scaffolding for their end user. The example in this repository creates an eks cluster within it's own vpc with public and private subnets.
 
+![EKS within its own VPC using Terraform!!](./images/eks_terraform.png)
+
 ## Summary
 
 This repository has a top level terraform module [cluster](./cluster/README.md) which scaffolds [vpc_and_subnets](./modules/vpc_and_subnets/README.md) and [eks](./modules/eks/README.md) modules to create following resources -
