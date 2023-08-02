@@ -202,6 +202,12 @@ Error from server (NotFound): services "nginx" not found
 terraform destroy -var-file="sample.tfvars"
 ```
 
+3. Delete the s3 bucket created to store tfstate
+
+```shell
+aws s3api delete-bucket --bucket "your-bucket-name" --region "your-aws-region"
+```
+
 ## Terraform Documentation
 
 ### Requirements
